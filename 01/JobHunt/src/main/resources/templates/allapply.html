@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template::head"> </head>
+
+
+<body>
+  <div class="nav" >
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs|pills" id="navId" role="tablist">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: grey">
+        <div class="container">
+          <a th:href="@{/}" class="navbar-brand" style="color: goldenrod;">Home </a>
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/applicant/add}">Add new</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </ul>
+    <div class="whitespace" style="padding-top: 56px"></div>
+  </div>
+  <div class="context" align="center">
+  <h1 style="text-align: center;">All Applies</h1>
+    <table class="table table-striped w-auto">
+      <thead class="bg-success text-white" style="background-color: aquamarine;">
+        <tr style="text-align: center">
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Phone number</th>
+          <th>See full info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="apply,iStat:${applies}">
+          <td th:text="${apply.fullName}"></td>
+          <td th:text="${apply.email}"></td>
+          <td th:text="${apply.phoneNumber}"></td>
+          <!-- <td th:text="${employer.address}"></td> -->
+          <td><a th:href="@{/applicant/{id}(id=${apply.id})}" class="btn btn-primary" style="background-color: lightskyblue" >Click here</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="script" th:replace="template::script"></div>
+</body>
+
+</html>

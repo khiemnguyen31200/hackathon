@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template::head"> </head>
+
+
+<body>
+  <div class="nav" >
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs|pills" id="navId" role="tablist">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: grey">
+        <div class="container">
+          <a th:href="@{/}" class="navbar-brand" style="color: goldenrod;">Home </a>
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/employer/add}">Add new</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </ul>
+    <div class="whitespace" style="padding-top: 56px"></div>
+  </div>
+  <div class="context" align="center">
+  <h1 style="text-align: center;">All employers</h1>
+    <table class="table table-striped w-auto">
+      <thead class="bg-success text-white" style="background-color: aquamarine;">
+        <tr style="text-align: center">
+
+          <th></th>
+          <th>Name</th>
+          <th>Website</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>See full info</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="employer,iStat:${employers}">
+
+          <td><img th:src="|/logo/${employer.logoPath}|" alt="logo" width="50px" height="20px"></td>
+          <td th:text="${employer.name}"></td>
+          <td><a th:href="${employer.website}" th:text="${employer.website}" target="_blank"></a></td>
+          <td th:text="${employer.email}"></td>
+          <td th:text="${employer.address}"></td>
+          <td><a th:href="@{/employer/{id}(id=${employer.id})}" class="btn btn-primary" style="background-color: lightskyblue" >Click here</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="script" th:replace="template::script"></div>
+</body>
+
+</html>

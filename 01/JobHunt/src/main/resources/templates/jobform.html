@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template::head"> </head>
+
+<body>
+
+    <div class="nav" >
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs|pills" id="navId" role="tablist">
+          <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: grey">
+            <div class="container">
+              <a th:href="@{/}" class="navbar-brand" style="color: goldenrod;">Home </a>
+            </div>
+          </nav>
+        </ul>
+        <div class="whitespace" style="padding-top: 56px"></div>
+
+      </div>
+
+  <div class="context" align="center">
+    <form action="#" th:action="@{/job/save}" th:object="${job}" method="post" novalidate="novalidate">
+<!--        -->
+<!--      <input type="hidden" placeholder="id" th:field="*{id}" /><br></br>-->
+      <input type="hidden"  th:field="*{id}" />
+      <input type="hidden"  th:field="*{empId}" />
+      <input type="text" placeholder="Name of Job" th:field="*{title}" /><br><br>
+      <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div><br><br>
+      <div></div>
+      <select th:field ="*{city}">
+        <option value="">-- Select a city --</option>
+        <option 
+        th:each="city:${citycode}" 
+        th:text="${city.value}" 
+        th:value="${city.value}">
+        </option>
+      </select>
+      <!-- <div></div><br>
+      <select th:field ="*{company}"><br><br>
+        <option value="">-- Select a company --</option>
+        <option 
+        th:each="company:${companycode}" 
+        th:text="${company.name}" 
+        th:value="${company.name}"></option>
+      </select> -->
+      <div></div><br>
+      <input type="text" placeholder="Description" th:field="*{jobDescription}" /><br><br>
+      <a th:href="@{/employer/list}"><button type="button" class="btn btn-primary" style="background-color: red;">Cancel</button></a>
+      <a><button type="submit" class="btn btn-primary">Save</button></a>
+  </div>
+  </form>
+</body>
+
+</html>

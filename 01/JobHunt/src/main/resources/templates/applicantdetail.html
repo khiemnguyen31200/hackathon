@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="template::head"> </head>
+
+<body>
+    <div class="nav" >
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs|pills" id="navId" role="tablist">
+          <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: grey">
+            <div class="container">
+              <a th:href="@{/}" class="navbar-brand" style="color: goldenrod;">Home </a>
+              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" th:href="@{/applicant/add}">Add new</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </ul>
+        <div class="whitespace" style="padding-top: 56px"> </div>
+      </div>
+  <div class="context" align="center">
+    <h1 style="font-weight: bold;">Nhà tuyển dụng</h1>
+    <h2 th:text="${apply.fullName}" ></h2><br>
+    <h1 style="font-weight: bold;">Địa chỉ email</h1>
+    <h2 th:text="${apply.email}"></h2>
+      <h1 style="font-weight: bold;">Phone number</h1>
+      <h2 th:text="${apply.phoneNumber}"></h2><br>
+      <h1 style="font-weight: bold;"></h1>Apply Job
+      <h2 th:text="${apply.appliedJob}"></h2><br>
+      <h1 style="font-weight: bold;"></h1>Talents
+      <h2 th:text="${apply.talentDescription}"></h2><br>
+      
+    
+    
+    <a th:href="@{/applicant/list}"><button type="button" class="btn btn-primary" style="background-color: red;">Home</button></a>
+    <a th:href="@{/applicant/edit/{id}(id=${apply.id})}"><button type="button" class="btn btn-primary" style="background-color: burlywood;">Edit</button></a>
+    <a th:href="@{/applicant/delete/{id}(id=${apply.id})}"><button type="button" class="btn btn-primary" style="background-color: black;" >Delete</button></a>
+    
+  </div>
+
+</html>
