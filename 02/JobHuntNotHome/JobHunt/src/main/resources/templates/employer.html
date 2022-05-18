@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${employer.name}"></title>
+</head> -->
+
+<head th:replace="template.html :: header(${employer.name})">
+</head>
+
+<body>
+  <header th:insert="template.html :: topmenu"> </header>
+  <div class="container">
+
+    <nav aria-label="breadcrumb" style="margin-bottom: 40px;">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" style="font-weight: 400; "><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item" style="font-weight: 400; "><a th:href="@{/employer}">Employers</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="font-weight: 600; color: #000">Detail</li>
+      </ol>
+    </nav>
+    <div class="row" style="width: 70%">
+      <div class="col-md">
+        <img th:src="|/logo/${employer.logo_path}|" width="200" />
+        <a th:href="|/employer/edit/${employer.id}|" class="btn btn-primary float-end">Edit Employer</a>
+        <a th:href="|/employer/delete/${employer.id}|" class="btn btn-danger float-end">Delete Employer</a>
+      </div>
+    </div>
+
+
+    <table class="table table-bordered" style="width: 70%">
+      <tbody>
+        <tr>
+          <th scope="row" style="width: 20%">Employer Name</th>
+          <td th:text="${employer.name}" style="width: 80%">Name</td>
+        </tr>
+        <tr>
+          <th scope="row">Website</th>
+          <td th:text="${employer.website}">Website</td>
+        </tr>
+        <tr>
+          <th scope="row">Email</th>
+          <td th:text="${employer.email}">Email</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a th:href="|/job/add/${employer.id}|" class="btn btn-primary ">Add Job</a>
+    <button type="button" class="btn btn-info " th:onclick="toggle(this);">View List Job</button>
+
+    <table id="job" hidden="hidden" class="table table-striped table-bordered ">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">City</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="job, iStat:${jobs}">
+          <th scope="row" th:text="${iStat.index} +1"></th>
+          <td><a th:href="|/job/${job.id}|" th:text="${job.title}"></a></td>
+          <td th:text="${job.description}">Description</td>
+          <td th:text="${job.city}">City</td>
+          <td><a th:href="|/applicant/apply/${job.id}|">Apply</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <header th:replace="template.html :: footer"> </header>
+</body>
+
+</html>

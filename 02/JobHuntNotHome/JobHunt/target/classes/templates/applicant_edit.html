@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template.html :: header('Add employer')">
+</head>
+
+<body>
+  <header th:insert="template.html :: topmenu"> </header>
+
+  <nav aria-label="breadcrumb" style="margin-bottom: 40px;">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" style="font-weight: 400; "><a th:href="@{/}">Home</a></li>
+      <li class="breadcrumb-item" style="font-weight: 400; "><a th:href="@{/employer}">Employers</a></li>
+      <li class="breadcrumb-item" style="font-weight: 400; "><a th:href="|/job/${applicantReq.job_id}|">Applicant</a></li>
+      <li class="breadcrumb-item active" aria-current="page" style="font-weight: 600; color: #000">Edit</li>
+    </ol>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mt-5">
+        <form action="#" th:action="@{/applicant/edit}" method="post" name="applicant" th:object="${applicantReq}">
+          <input type="hidden" class="form-control" th:field="*{id}" />
+          <input type="hidden" class="form-control" th:field="*{job_id}" />
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="name" autocomplete="off" th:field="*{name}" />
+            </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+          </div>
+
+          <div class="form-group row mt-3">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="email" autocomplete="off" th:field="*{email}" />
+            </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+          </div>
+
+          <div class="form-group row mt-3">
+            <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="phone" autocomplete="off" th:field="*{phone}" />
+            </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</div>
+          </div>
+
+          <!-- <div class="form-group row mt-3">
+            <label for="name" class="col-sm-2 col-form-label">Skill</label>
+            <div class="col-sm-4">
+              <input type="checkbox" name="skills" th:each="state : ${T(vn.techmaster.job_hunt.model.Skill).values()}"
+                th:text="${state}" th:value="${state}" th:field="*{skills}" />
+            </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('skills')}" th:errors="*{skills}">Skill Error</div>
+          </div> -->
+
+
+          <div class="form-group row mt-3">
+            <label for="skills" class="col-sm-2 col-form-label">Skill</label>
+            <div class="col-sm-4">
+              <span th:each="state : ${T(vn.techmaster.job_hunt.model.Skill).values()}">
+                <input type="checkbox" name="skills" th:value="${state}" th:field="*{skills}" >
+                <label th:text="${state}" for="name"></label><br>
+              </span>
+            </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('skills')}" th:errors="*{skills}">Skill Error</div>
+          </div>
+
+          <button class="btn btn-primary mt-3" type="submit" name="action" value="save">Save</button>
+          <button class="btn btn-danger  mt-3" type="submit" name="action" value="delete">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <header th:replace="template.html :: footer"> </header>
+</body>
+
+</html>

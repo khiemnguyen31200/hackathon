@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="template.html :: header(${job.getTitle()})">
+</head>
+
+<body>
+  <header th:insert="template.html :: topmenu"> </header>
+
+  <div class="container">
+    <nav aria-label="breadcrumb" style="margin-bottom: 40px;">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" style="font-weight: 400; "><a th:href="@{/job}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="font-weight: 600; color: #000">Detail</li>
+      </ol>
+    </nav>
+    <!-- employer info -->
+    <div class="row" style="width: 70%">
+      <div class="col-md">
+        <img th:src="|/logo/${employer.logo_path}|" width="200" />
+      </div>
+    </div>
+    <table class="table table-bordered" style="width: 70%">
+      <tbody>
+        <tr>
+          <th scope="row" style="width: 20%">Employer Name</th>
+          <td th:text="${employer.name}" style="width: 80%">Name</td>
+        </tr>
+        <tr>
+          <th scope="row">Website</th>
+          <td th:text="${employer.website}">Website</td>
+        </tr>
+        <tr>
+          <th scope="row">Email</th>
+          <td th:text="${employer.email}">Email</td>
+        </tr>
+            <!-- job info -->
+            <tr>
+              <td colspan="2"  class="text-center">JOB INFO</td>
+            </tr>
+        <tr>
+          <th scope="row" style="width: 20%">Title</th>
+          <td th:text="${job.title}" style="width: 80%">Title</td>
+        </tr>
+        <tr>
+          <th scope="row">Description</th>
+          <td th:text="${job.description}">Description</td>
+        </tr>
+        <tr>
+          <th scope="row">City</th>
+          <td th:text="${job.city}">City</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary"><a th:href="|/applicant/apply/${job.id}|" style="text-decoration: none ; color: white">Apply</a></button>
+    <button type="button" class="btn btn-info " th:onclick="toggle(this);">View List Others Job</button>
+
+    <table id="job" hidden="hidden" class="table table-striped table-bordered ">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">City</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="job, iStat:${jobs}">
+        <th scope="row" th:text="${iStat.index} +1"></th>
+        <td><a th:href="|/job/${job.id}/dashboard|" th:text="${job.title}"></a></td>
+        <td th:text="${job.description}">Description</td>
+        <td th:text="${job.city}">City</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function back(){
+      history.back();
+    }
+  </script>
+  <header th:replace="template.html :: footer"> </header>
+</body>
+
+</html>

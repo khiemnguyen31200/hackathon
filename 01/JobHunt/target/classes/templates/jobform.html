@@ -35,14 +35,7 @@
         th:value="${city.value}">
         </option>
       </select>
-      <!-- <div></div><br>
-      <select th:field ="*{company}"><br><br>
-        <option value="">-- Select a company --</option>
-        <option 
-        th:each="company:${companycode}" 
-        th:text="${company.name}" 
-        th:value="${company.name}"></option>
-      </select> -->
+
       <div></div><br>
       <input type="text" placeholder="Description" th:field="*{jobDescription}" /><br><br>
       <a th:href="@{/employer/list}"><button type="button" class="btn btn-primary" style="background-color: red;">Cancel</button></a>

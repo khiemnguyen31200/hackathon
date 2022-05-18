@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="template.html :: header('Home page')">
+</head>
+
+<body>
+<header th:insert="template.html :: topmenu"> </header>
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2" >
+            <form role="search" th:action="@{/job/search}" method="post"  >
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn ">
+                            <select th:object="${city}" name="city">
+                                <option> ----City----
+                                </option>
+                                <option th:each="state : ${T(vn.techmaster.job_hunt.model.City).values()}" th:value="${state.label}"
+                                                                    th:text="${state.label}" >
+                                </option>
+                            </select>
+                            </span>
+                        </button>
+
+                    </div>
+                    <input type="hidden" id="txt-category">
+                    <input type="text" id="txt-search" class="form-control" placeholder="Search for..." th:object="${keyword}" name="keyword">
+                    <span class="input-group-btn">
+                    <button id="btn-search"  class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search "> Search</span>
+            </button>
+        </span>
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<table id="applicant"  class="table table-striped table-bordered ">
+    <thead class="table-light">
+    <tr>
+        <th>No.</th>
+        <th>Title</th>
+        <th>Employer</th>
+        <th>City</th>
+        <th>Description</th>
+        <th>Applicant total</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="job, iStat:${jobs}">
+        <th scope="row" th:text="${iStat.index}+1"></th>
+        <td> <a th:href="|/job/${job.id}/dashboard|" th:text="${job.title}"></a></td>
+        <td><a th:text ="${employers.findById(job.getEmployer().getId()).get().name}"></a></td>
+        <td th:text ="${job.city}"></td>
+        <td th:text ="${job.description}"></td>
+        <td th:utext="${totalApplicant.get(job.id) == null} ? 0 : ${totalApplicant.get(job.id)}"></td>
+    </tr>
+
+
+
+    </tbody>
+</table>
+</div>
+<header th:replace="template.html :: footer"> </header>
+</body>
+
+</html>

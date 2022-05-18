@@ -10,8 +10,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import vn.techmaster.job_hunt.model.Employer;
 import vn.techmaster.job_hunt.repository.EmployerRepo;
+import vn.techmaster.job_hunt.repository.JobRepo;
 import vn.techmaster.job_hunt.request.EmployerRequest;
 import vn.techmaster.job_hunt.service.EmployerService;
+import vn.techmaster.job_hunt.service.JobService;
 import vn.techmaster.job_hunt.service.StorageService;
 
 import javax.validation.Valid;
@@ -27,6 +29,8 @@ public class EmployerController {
     private EmployerRepo employerRepo;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private JobService jobService;
 
     @Autowired
     private EmployerService employerService;
@@ -40,6 +44,7 @@ public class EmployerController {
     @GetMapping(value = "/{id}")
     public String showEmployerDetailByID(Model model, @PathVariable String id) {
         model.addAttribute("employer", employerRepo.findById(id).get());
+        model.addAttribute("jobs", jobService.findByEmpId(id));
         return "employer";
     }
 
